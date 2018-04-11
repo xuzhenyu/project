@@ -1,10 +1,10 @@
 <template>
     <div class="w-sale-spk">
         <dl class="w-ac-dl">
-            <dt>2011年7月奔驰E260L豪华{{ dtmsg }}</dt>
+            <dt>2011年7月{{ $route.params.place }}奔驰E260L豪华款</dt>
             <dd class="w-dd-g">
                 <img alt="" src="../assets/image/w-tx01.jpg">
-                <span><b>李先生：</b>迈腾换奔驰
+                <span><b>{{ $route.params.user }}：</b>迈腾换奔驰
 本来开的迈腾，听说有直接换好车的好事就试试。换了奔驰就是不一样，起步迅猛，加速有力。操控很地道，推背感明显，感觉很皮实。经常跑长途，看中空间，尤其是后排的腿部空间和头部空间都很充裕。内饰做的很高档！关键是没加钱就换上了，有礼有面儿。
 </span>
             </dd>
@@ -37,7 +37,6 @@
 </template>
 <script>
   export default{
-    props: ['dtmsg'],
   };
 </script>
 <style scoped>
