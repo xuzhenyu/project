@@ -3,7 +3,7 @@
         <dl class="w-ac-dl">
             <dt>购车者说</dt>
             <!-- <carSpeak :dtmsg="msg"></carSpeak> -->
-            <!-- <Section1 :dtmsg="msg"></Section1> -->
+            <Section1 :dtmsg="msg" @my-event="getMyEvent"></Section1>
         </dl>
         <div class="mint-swipe">
           <mt-swipe :auto="3000">
@@ -30,7 +30,12 @@
     },
     data(){
       return{
-        msg:'来自父组件的信息'
+        msg:'实体店看车'
+      }
+    },
+    methods:{
+      getMyEvent(name){
+        console.log('xxxxx'+name);
       }
     }
   };

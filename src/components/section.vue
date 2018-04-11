@@ -4,8 +4,8 @@
           <div class="w-sdiv">
             <div>
                 <p class="w-look"></p>
-                <strong>实体店看车{{dtmsg}}</strong>
-                <span>一城十店<br/>现场看车</span>
+                <strong>{{dtmsg}}</strong>
+                <span @click = "emitMyEvent">一城十店<br/>现场看车</span>
             </div>
             <div>
                 <p class="w-true"></p>
@@ -28,7 +28,17 @@
 </template>
 <script>
   export default{
-    props:['dtmsg']
+    props:['dtmsg'],
+    data(){
+      return{
+        name:'Jerry'
+      }
+    },
+    methods:{
+      emitMyEvent(){
+        this.$emit('my-event',this.name);
+      }
+    }
   }
 </script>
 <style scope>
