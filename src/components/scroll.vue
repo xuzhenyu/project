@@ -11,18 +11,32 @@
               <router-link :to="{
                 name:'carspeak',
                 params:{
-                  user:'jerry',
-                  place:'襄阳'
+                  user:namegp[0],
+                  place:palcegp[0]
                 }
               }">
                 <img src="../assets/image/demo/w-banner02.png" alt="">
               </router-link>
             </mt-swipe-item>
             <mt-swipe-item class="slide2">
-              <router-link :to="{name:'carspeak'}"><img src="../assets/image/demo/w-banner03.png" alt=""></router-link>
+              <router-link :to="{
+                name:'carspeak',
+                params:{
+                  user:namegp[1],
+                  place:palcegp[1]
+                }
+              }">
+                <img src="../assets/image/demo/w-banner03.png" alt="">
+              </router-link>
             </mt-swipe-item>
             <mt-swipe-item class="slide3">
-              <router-link :to="{name:'carspeak'}"><img src="../assets/image/demo/w-banner04.png" alt=""></router-link>
+              <router-link :to="{
+                name:'carspeak',
+                params:{
+                  user:namegp[2],
+                  place:palcegp[2]
+                }
+              }"><img src="../assets/image/demo/w-banner04.png" alt=""></router-link>
             </mt-swipe-item>
           </mt-swipe>
         </div>
@@ -38,12 +52,14 @@
     },
     data(){
       return{
-        msg:'实体店看车'
+        msg:'实体店看车',
+        namegp:['Jerry','Tomi','Backy'],
+        palcegp:['襄阳','Tokoy','上海']
       }
     },
     methods:{
-      getMyEvent(name){
-        console.log('xxxxx'+name);
+      getMyEvent(name1){
+        console.log('xxxxx'+name1);
       }
     }
   };

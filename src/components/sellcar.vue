@@ -1,5 +1,5 @@
 <template>
-    <div class="w-sale-spk">
+    <div id="sellcar" class="w-sale-spk">
         <dl class="w-ac-dl">
             <dt>2011年7月{{ $route.params.place }}奔驰E260L豪华款</dt>
             <dd class="w-dd-g">
@@ -29,6 +29,8 @@
                 <span><b>范小姐：</b>天籁换奥迪
 一直是想换A6的，就是价格望而却步，所以好多年了都没有行动。听朋友介绍的“你我车”换车，询问了一下，可以不贴钱就换车，还可以在不用的日子出租来还贷款，一下子就心动了。本来的天籁没贴钱就换成了A6，实现了多年来的愿望，算是提前给自己的生日礼物吧~
 </span>
+<span v-if="jiaru">正常显示</span>
+<span v-else>非正常显示</span>
             </dd>
         </dl>
         <img class="w-img" src="../assets/image/w-picr03.jpg" alt="">
@@ -37,42 +39,48 @@
 </template>
 <script>
   export default{
+    name:'sellcar',
+    data(){
+      return {
+        jiaru:false
+      }
+    }
   };
 </script>
-<style scoped>
-    .w-ac-dl {
+<style scoped lang="scss">
+.w-ac-dl {
   max-width: 10.0rem;
   margin: 0 auto;
   color: #5f5f5f;
   overflow: hidden;
   margin-bottom: 0.266667rem;
-}
-.w-ac-dl dt {
-  background: url(../assets/image/w_icon_line.png) no-repeat 0.33333rem 0.29333rem;
-  background-size: 0.12rem 0.413333rem;
-  padding-left: 0.6rem;
-  height: 0.933333rem;
-  line-height: 0.933333rem;
-  font-size: 0.373333rem;
-}
-.w-ac-dl dd {
-  padding-left: 0.2667rem;
-  font-size: 0.32rem;
-}
-.w-ac-dl .w-dt-big {
-  font-size: 0.48rem;
+    dt {
+    background: url(../assets/image/w_icon_line.png) no-repeat 0.33333rem 0.29333rem;
+    background-size: 0.12rem 0.413333rem;
+    padding-left: 0.6rem;
+    height: 0.933333rem;
+    line-height: 0.933333rem;
+    font-size: 0.373333rem;
+  }
+  dd {
+    padding-left: 0.2667rem;
+    font-size: 0.32rem;
+  }
+  .w-dt-big {
+    font-size: 0.48rem;
+  }
 }
 .w-sale-spk {
   margin: 0 auto 1.333333rem;
   font-size: 0.4rem;
-}
-.w-sale-spk p {
-  margin: 0.4rem 0;
-}
-.w-sale-spk .w-img {
-  width: 10.0rem;
-  display: block;
-  margin: 0 auto 0.266667rem;
+  p {
+    margin: 0.4rem 0;
+  }
+  .w-img {
+    width: 10.0rem;
+    display: block;
+    margin: 0 auto 0.266667rem;
+  }
 }
 .w-dd-g span{
   width: 5.3333rem;
