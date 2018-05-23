@@ -1,7 +1,7 @@
 <template>
     <div id="car-list">
         <div class="w-banner">
-            <img src="../assets/image/w_banner.jpg" alt="">
+          <router-link :to="{name:'Elm'}"><img src="../assets/image/w_banner.jpg" alt=""></router-link>
         </div>
         <div class="w-pic-group">
         <p class="w-p-more"><a href="#">更多车型</a><i>>></i></p>

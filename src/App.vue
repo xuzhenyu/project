@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import NavTop from './components/header.vue'
-import NavFooter from './components/footer.vue'
+import NavTop from '@/components/header'
+import NavFooter from './components/footer'
 export default {
   name: 'app',
   components:{

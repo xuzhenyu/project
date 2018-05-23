@@ -14,9 +14,7 @@
                   user:namegp[0],
                   place:palcegp[0]
                 }
-              }">
-                <img src="../assets/image/demo/w-banner02.png" alt="">
-              </router-link>
+              }"><img src="../assets/image/demo/w-banner02.png" alt=""></router-link>
             </mt-swipe-item>
             <mt-swipe-item class="slide2">
               <router-link :to="{
@@ -25,9 +23,7 @@
                   user:namegp[1],
                   place:palcegp[1]
                 }
-              }">
-                <img src="../assets/image/demo/w-banner03.png" alt="">
-              </router-link>
+              }"><img src="../assets/image/demo/w-banner03.png" alt=""></router-link>
             </mt-swipe-item>
             <mt-swipe-item class="slide3">
               <router-link :to="{

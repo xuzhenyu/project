@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import carSpeak from '../components/sellcar.vue'
 import HomeNav from '../components/homenav.vue'
 import sourceList from '../components/sourcelist.vue'
+import Elm from '../components/elm.vue'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path:'/listcar',
       name:'sourcelist',
       component:sourceList
+    },
+    {
+      path:'/elm',
+      name:'Elm',
+      component:Elm
     }
   ]
 })
