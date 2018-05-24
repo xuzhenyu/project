@@ -1,9 +1,11 @@
 
 import Vue from 'vue'
+import Elementui from 'element-ui'
 import App from './App'
 import router from './router'
 import MintUI from 'mint-ui'
 //import Swipe from 'mint-ui'
+import 'element-ui/lib/theme-chalk/index.css';
 import '../node_modules/mint-ui/lib/style.css'
 
 import Mb1 from './assets/js/flexible.debug.js'
@@ -11,6 +13,7 @@ import Mb2 from './assets/js/flexible_css.debug.js'
 
   Vue.use(MintUI)
   Vue.component(MintUI)
+  Vue.use(Elementui)
 //import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 //import './assets/css/swiper-3.4.2.min.css'
