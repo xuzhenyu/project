@@ -37,7 +37,7 @@ import axios from 'axios'
                })
             }
           }
-  }
+  };
 </script>
 <style scoped>
 .w-pic-group {

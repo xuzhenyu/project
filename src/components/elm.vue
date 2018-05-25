@@ -27,12 +27,37 @@
             </el-col>
             <el-col :span="17">我是产品栏</el-col>
         </el-row>
-        <div class="div-detail">
-            <el-col :span="24">dddd</el-col>
-        </div>
+        <el-col :span="24">
+            <div class="often-goods">
+                <h4 class="title">商品名称</h4>
+                <ul class="often-goods-list">
+                    <li v-for="item in oftenGoods"><span>{{ item.goodsName }}</span><span class="o-price">￥{{item.price}}元</span></li>
+                </ul>
+            </div>
+            <div class="food-type">
+                <el-tabs>
+                    <el-tab-pane label="汉堡">
+                        <ul class='cookList'>
+                            <li v-for="oftengoods in type0Goods">
+                                <span class="foodImg"><img :src="oftengoods.goodsImg" width="100%"></span>
+                                <span class="foodName">{{oftengoods.goodsName}}</span>
+                                <span class="foodPrice">￥{{oftengoods.price}}元</span>
+                            </li>
+                        </ul>
+                    </el-tab-pane>
+                    <el-tab-pane label="薯条">
+                    薯条
+                    </el-tab-pane>
+                    <el-tab-pane label="饮料">
+                    饮料
+                    </el-tab-pane>
+                </el-tabs>
+            </div>
+        </el-col>
     </div>
 </template>
 <script>
+import axios from 'axios'
     export default{
         name:'pos',
         data(){
@@ -45,32 +70,90 @@
                     foodName:'川香回锅肉',
                     foodCount:1,
                     foodPrice:25
-                },{
-                    foodName:'酸菜鱼',
-                    foodCount:3,
-                    foodPrice:198
-                },{
-                    foodName:'干锅花菜',
-                    foodCount:2,
-                    foodPrice:50
-                }]
+                }],
+                oftenfoods:[],
+                type0Goods:[]
             }
         },
+          created(){
+              axios.get('http://jspang.com/DemoApi/oftenGoods.php')
+              .then(response=>{
+                 console.log(response);
+                 this.oftenGoods=response.data;
+              })
+              .catch(error=>{
+                  console.log(error);
+                  alert('网络错误，不能访问');
+              })
+          },
         mounted:function(){
             var orderHeight = document.body.clientHeight;
             document.getElementById("order-list").style.height=orderHeight+'px';
-
         }
-    }
+    };
 </script>
 
 <style scoped>
+    html{
+        overflow-y: auto;
+    }
     .pos-order{
-        height:10.0rem;
+        height:5.33rem;
         background-color: #fff;
         border-right:1px solid #ddd;
     }
     .div-btn{
         margin-top:10px;
     }
+    .title{
+        border-bottom:1px solid #ddd;
+        background-color:#f1f1f1;
+        padding:0.25rem;
+        text-align: left;
+    }
+    .often-goods-list{
+        height: 2.67rem;
+        overflow-y: auto;
+        padding-left: 0.13rem
+    }
+    .often-goods-list li{
+        float: left;
+        border: 1px solid #ddd;
+        padding: 0.125rem;
+        font-size: 0.24rem;
+        margin:0.25rem 0.13rem 0 0;
+    }
+    .o-price{
+        color: #409EFF;
+    }
+    .cookList li{
+       list-style: none;
+       width:31%;
+       border:1px solid #E5E9F2;
+       height: auto;
+       overflow: hidden;
+       background-color:#fff;
+       padding: 0.03rem;
+       float:left;
+       margin: 0.03rem;
+ 
+   }
+   .cookList li span{
+        display: block;
+        float:left;
+   }
+   .foodImg{
+       width: 40%;
+   }
+   .foodName{
+       font-size: 0.21rem;
+       padding-left: 0.13rem;
+       color:brown;
+ 
+   }
+   .foodPrice{
+       font-size: 0.21rem;
+       padding-left: 0.13rem;
+       padding-top:0.13rem;
+   }
 </style>

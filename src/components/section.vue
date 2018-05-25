@@ -39,7 +39,7 @@
         this.$emit('my-event',this.name);
       }
     }
-  }
+  };
 </script>
 <style scope>
     section {
