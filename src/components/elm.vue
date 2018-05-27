@@ -9,7 +9,7 @@
                             <el-table-column prop="foodCount" label="数量" width="60" ></el-table-column>
                             <el-table-column prop="foodPrice" label="价格" width="60"></el-table-column>
                             <el-table-column prop="foodDo" label="操作" width="100" fixed="right">
-                                <template scope="scope">
+                                <template slot-scope="scope">
                                     <el-button type="text" size="small">删除</el-button>
                                     <el-button type="text" size="small">增加</el-button>
                                 </template>
@@ -46,10 +46,22 @@
                         </ul>
                     </el-tab-pane>
                     <el-tab-pane label="薯条">
-                    薯条
+                        <ul class='cookList'>
+                            <li v-for="often1goods in type1Goods">
+                                <span class="foodImg"><img :src="often1goods.goodsImg" width="100%"></span>
+                                <span class="foodName">{{often1goods.goodsName}}</span>
+                                <span class="foodPrice">￥{{often1goods.price}}元</span>
+                            </li>
+                        </ul>
                     </el-tab-pane>
                     <el-tab-pane label="饮料">
-                    饮料
+                        <ul class='cookList'>
+                            <li v-for="often2goods in type2Goods">
+                                <span class="foodImg"><img :src="often2goods.goodsImg" width="100%"></span>
+                                <span class="foodName">{{often2goods.goodsName}}</span>
+                                <span class="foodPrice">￥{{often2goods.price}}元</span>
+                            </li>
+                        </ul>
                     </el-tab-pane>
                 </el-tabs>
             </div>
@@ -71,8 +83,10 @@ import axios from 'axios'
                     foodCount:1,
                     foodPrice:25
                 }],
-                oftenfoods:[],
-                type0Goods:[]
+                oftenGoods:[],
+                type0Goods:[],
+                type1Goods:[],
+                type2Goods:[]
             }
         },
           created(){
@@ -85,6 +99,19 @@ import axios from 'axios'
                   console.log(error);
                   alert('网络错误，不能访问');
               })
+       //读取分类商品列表
+      axios.get('http://jspang.com/DemoApi/typeGoods.php')
+      .then(response=>{
+         console.log(response);
+         //this.oftenGoods=response.data;
+         this.type0Goods=response.data[0];
+         this.type1Goods=response.data[1];
+         this.type2Goods=response.data[2]; 
+      })
+      .catch(error=>{
+          console.log(error);
+          alert('网络错误，不能访问');
+      })
           },
         mounted:function(){
             var orderHeight = document.body.clientHeight;
