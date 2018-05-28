@@ -5,10 +5,10 @@
                 <el-tabs>
                     <el-tab-pane label="点餐">
                         <el-table :data="tableData" border style="width:100%;">
-                            <el-table-column prop="foodName" label="商品名称" width="150"></el-table-column>
-                            <el-table-column prop="foodCount" label="数量" width="60" ></el-table-column>
-                            <el-table-column prop="foodPrice" label="价格" width="60"></el-table-column>
-                            <el-table-column prop="foodDo" label="操作" width="100" fixed="right">
+                            <el-table-column prop="goodsName" label="商品名称" width="150"></el-table-column>
+                            <el-table-column prop="count" label="数量" width="60" ></el-table-column>
+                            <el-table-column prop="price" label="价格" width="60"></el-table-column>
+                            <el-table-column label="操作" width="100" fixed="right">
                                 <template slot-scope="scope">
                                     <el-button type="text" size="small">删除</el-button>
                                     <el-button type="text" size="small">增加</el-button>
@@ -31,7 +31,7 @@
             <div class="often-goods">
                 <h4 class="title">商品名称</h4>
                 <ul class="often-goods-list">
-                    <li v-for="item in oftenGoods"><span>{{ item.goodsName }}</span><span class="o-price">￥{{item.price}}元</span></li>
+                    <li v-for="goods in oftenGoods" @click="addOrderList(goods)"><span>{{ goods.goodsName }}</span><span class="o-price">￥{{goods.price}}元</span></li>
                 </ul>
             </div>
             <div class="food-type">
@@ -41,7 +41,7 @@
                             <li v-for="oftengoods in type0Goods">
                                 <span class="foodImg"><img :src="oftengoods.goodsImg" width="100%"></span>
                                 <span class="foodName">{{oftengoods.goodsName}}</span>
-                                <span class="foodPrice">￥{{oftengoods.price}}元</span>
+                                <span @click="aaa()" class="foodPrice">￥{{oftengoods.price}}元</span>
                             </li>
                         </ul>
                     </el-tab-pane>
@@ -70,49 +70,72 @@
 </template>
 <script>
 import axios from 'axios'
+import $ from 'jquery'
     export default{
         name:'pos',
         data(){
             return{
-                tableData:[{
-                    foodName:'番茄炒蛋',
-                    foodCount:2,
-                    foodPrice:24
-                },{
-                    foodName:'川香回锅肉',
-                    foodCount:1,
-                    foodPrice:25
-                }],
+                tableData:[],
                 oftenGoods:[],
                 type0Goods:[],
                 type1Goods:[],
                 type2Goods:[]
             }
         },
-          created(){
-              axios.get('http://jspang.com/DemoApi/oftenGoods.php')
-              .then(response=>{
-                 console.log(response);
-                 this.oftenGoods=response.data;
-              })
-              .catch(error=>{
-                  console.log(error);
-                  alert('网络错误，不能访问');
-              })
-       //读取分类商品列表
-      axios.get('http://jspang.com/DemoApi/typeGoods.php')
-      .then(response=>{
-         console.log(response);
-         //this.oftenGoods=response.data;
-         this.type0Goods=response.data[0];
-         this.type1Goods=response.data[1];
-         this.type2Goods=response.data[2]; 
-      })
-      .catch(error=>{
-          console.log(error);
-          alert('网络错误，不能访问');
-      })
-          },
+      created(){
+          axios.get('http://jspang.com/DemoApi/oftenGoods.php')
+          .then(response=>{
+            // console.log(response);
+            //  console.log(response.data.length);
+             this.oftenGoods=response.data;
+          })
+          .catch(error=>{
+              console.log(error);
+              alert('网络错误，不能访问');
+          })
+           //读取分类商品列表
+          axios.get('http://jspang.com/DemoApi/typeGoods.php')
+          .then(response=>{
+             //this.oftenGoods=response.data;
+             this.type0Goods=response.data[0];
+             this.type1Goods=response.data[1];
+             this.type2Goods=response.data[2]; 
+          })
+          .catch(error=>{
+              console.log(error);
+              alert('网络错误，不能访问');
+          })
+        },
+        methods:{
+            aaa:function(){
+                $('.foodName').css('color','#999');
+            },
+            addOrderList(goods){//goods是渲染出来商品名称里的对象
+                //商品是否存在于订单列表
+                let isHave = false;
+                for(let i=0; i<this.tableData.length; i++){
+                    //console.log(this.tableData.length);
+                    if(this.tableData[i].goodsId == goods.goodsId){
+                        isHave = true;//已存在
+                    }
+                }
+
+                //根据判断的值编写业务逻辑
+                if(isHave){
+                    //改变列表中商品的数量
+                    //let arr = this.tableData.filter(o=>o.goodsId == goods.goodsId);
+                    let arr = $.grep(this.tableData,n=>n.goodsId == goods.goodsId);
+                    //console.log(this.tableData);
+                    arr[0].count++;
+                    //console.log(arr[0].count);
+                }else{
+                    let newGoods={goodsId:goods.goodsId,goodsName:goods.goodsName,price:goods.price,count:1};
+                    console.log(newGoods);
+                    this.tableData.push(newGoods);
+                    console.log(this.tableData);
+                }
+            }
+        },
         mounted:function(){
             var orderHeight = document.body.clientHeight;
             document.getElementById("order-list").style.height=orderHeight+'px';
@@ -128,6 +151,7 @@ import axios from 'axios'
         height:5.33rem;
         background-color: #fff;
         border-right:1px solid #ddd;
+        overflow-y: auto;
     }
     .div-btn{
         margin-top:10px;

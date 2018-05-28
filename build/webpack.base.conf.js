@@ -7,7 +7,7 @@ const vueLoaderConfig = require('./vue-loader.conf')
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
-
+var webpack = require('webpack')
 
 
 module.exports = {
@@ -29,6 +29,14 @@ module.exports = {
       '@': resolve('src'),
     }
   },
+plugins: [
+  new webpack.ProvidePlugin({
+$: "jquery",
+jQuery: "jquery",
+jquery: "jquery",
+"window.jQuery": "jquery"
+  })
+],
   module: {
     rules: [
       {
