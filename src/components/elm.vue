@@ -15,6 +15,10 @@
                                 </template>
                             </el-table-column>
                         </el-table>
+                        <div class="div-total">
+                          <small>数量：</small>{{ totalCount }}
+                          <small>价格：</small>{{ totalMoney }}
+                        </div>
                         <div class="div-btn">
                             <el-button type="warning">挂单</el-button>
                             <el-button type="danger">删除</el-button>
@@ -38,28 +42,28 @@
                 <el-tabs>
                     <el-tab-pane label="汉堡">
                         <ul class='cookList'>
-                            <li v-for="oftengoods in type0Goods">
-                                <span class="foodImg"><img :src="oftengoods.goodsImg" width="100%"></span>
-                                <span class="foodName">{{oftengoods.goodsName}}</span>
-                                <span @click="aaa()" class="foodPrice">￥{{oftengoods.price}}元</span>
+                            <li v-for="goods in type0Goods"  @click="addOrderList(goods)">
+                                <span class="foodImg"><img :src="goods.goodsImg" width="100%"></span>
+                                <span class="foodName">{{goods.goodsName}}</span>
+                                <span @click="aaa()" class="foodPrice">￥{{goods.price}}元</span>
                             </li>
                         </ul>
                     </el-tab-pane>
                     <el-tab-pane label="薯条">
                         <ul class='cookList'>
-                            <li v-for="often1goods in type1Goods">
-                                <span class="foodImg"><img :src="often1goods.goodsImg" width="100%"></span>
-                                <span class="foodName">{{often1goods.goodsName}}</span>
-                                <span class="foodPrice">￥{{often1goods.price}}元</span>
+                            <li v-for="goods in type1Goods" @click="addOrderList(goods)">
+                                <span class="foodImg"><img :src="goods.goodsImg" width="100%"></span>
+                                <span class="foodName">{{goods.goodsName}}</span>
+                                <span class="foodPrice">￥{{goods.price}}元</span>
                             </li>
                         </ul>
                     </el-tab-pane>
                     <el-tab-pane label="饮料">
                         <ul class='cookList'>
-                            <li v-for="often2goods in type2Goods">
-                                <span class="foodImg"><img :src="often2goods.goodsImg" width="100%"></span>
-                                <span class="foodName">{{often2goods.goodsName}}</span>
-                                <span class="foodPrice">￥{{often2goods.price}}元</span>
+                            <li v-for="goods in type2Goods" @click="addOrderList(goods)">
+                                <span class="foodImg"><img :src="goods.goodsImg" width="100%"></span>
+                                <span class="foodName">{{goods.goodsName}}</span>
+                                <span class="foodPrice">￥{{goods.price}}元</span>
                             </li>
                         </ul>
                     </el-tab-pane>
@@ -79,7 +83,9 @@ import $ from 'jquery'
                 oftenGoods:[],
                 type0Goods:[],
                 type1Goods:[],
-                type2Goods:[]
+                type2Goods:[],
+                totalCount:0,
+                totalMoney:0
             }
         },
       created(){
@@ -111,6 +117,8 @@ import $ from 'jquery'
                 $('.foodName').css('color','#999');
             },
             addOrderList(goods){//goods是渲染出来商品名称里的对象
+                this.totalCount=0;
+                this.totalMoney=0;
                 //商品是否存在于订单列表
                 let isHave = false;
                 for(let i=0; i<this.tableData.length; i++){
@@ -123,8 +131,7 @@ import $ from 'jquery'
                 //根据判断的值编写业务逻辑
                 if(isHave){
                     //改变列表中商品的数量
-                    //let arr = this.tableData.filter(o=>o.goodsId == goods.goodsId);
-                    let arr = $.grep(this.tableData,n=>n.goodsId == goods.goodsId);
+                    let arr = $.grep(this.tableData,n=>n.goodsId == goods.goodsId);//帅选出相同的那一项
                     //console.log(this.tableData);
                     arr[0].count++;
                     //console.log(arr[0].count);
@@ -134,6 +141,10 @@ import $ from 'jquery'
                     this.tableData.push(newGoods);
                     console.log(this.tableData);
                 }
+                $.each(this.tableData,(x,y)=>{
+                  this.totalCount += y.count;
+                  this.totalMoney += y.price*y.count;
+                })
             }
         },
         mounted:function(){
@@ -206,5 +217,9 @@ import $ from 'jquery'
        font-size: 0.21rem;
        padding-left: 0.13rem;
        padding-top:0.13rem;
+   }
+   .div-total{
+    line-height: 1.066667rem;
+    border-bottom: 1px solid #ddd;
    }
 </style>
