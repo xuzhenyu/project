@@ -10,8 +10,8 @@
                             <el-table-column prop="price" label="价格" width="60"></el-table-column>
                             <el-table-column label="操作" width="100" fixed="right">
                                 <template slot-scope="scope">
-                                    <el-button type="text" size="small">删除</el-button>
-                                    <el-button type="text" size="small">增加</el-button>
+                                    <el-button type="text" @click="delOrderList(scope.row)" size="small">删除</el-button>
+                                    <el-button type="text" @click="addOrderList(scope.row)" size="small">增加</el-button>
                                 </template>
                             </el-table-column>
                         </el-table>
@@ -21,8 +21,8 @@
                         </div>
                         <div class="div-btn">
                             <el-button type="warning">挂单</el-button>
-                            <el-button type="danger">删除</el-button>
-                            <el-button type="success">结账</el-button>
+                            <el-button @click="delAllOrderList()" type="danger">删除</el-button>
+                            <el-button @click="checkOut()" type="success">结账</el-button>
                         </div>
                     </el-tab-pane>
                     <el-tab-pane label="挂单">挂单</el-tab-pane>
@@ -131,7 +131,7 @@ import $ from 'jquery'
                 //根据判断的值编写业务逻辑
                 if(isHave){
                     //改变列表中商品的数量
-                    let arr = $.grep(this.tableData,n=>n.goodsId == goods.goodsId);//帅选出相同的那一项
+                    let arr = $.grep(this.tableData,n=>n.goodsId == goods.goodsId);//筛选出相同的那一项
                     //console.log(this.tableData);
                     arr[0].count++;
                     //console.log(arr[0].count);
@@ -141,10 +141,43 @@ import $ from 'jquery'
                     this.tableData.push(newGoods);
                     console.log(this.tableData);
                 }
-                $.each(this.tableData,(x,y)=>{
-                  this.totalCount += y.count;
-                  this.totalMoney += y.price*y.count;
-                })
+                this.getAllMoney();
+            },
+            //模拟结账
+            checkOut(){
+                if(this.tableData != 0){
+                    this.tableData = [];
+                    this.totalMoney = 0;
+                    this.totalCount = 0;
+                    this.$message({
+                        message:"结账成功！",
+                        type:'success'
+                    })
+                }else{
+                     this.$message.error('请选择商品后再点结账！');
+                }
+            },
+            //删除全部商品
+            delAllOrderList(){
+                this.tableData = [];
+                this.totalMoney = 0;
+                this.totalCount = 0;
+            },
+            //删除单个商品
+            delOrderList(goods){
+                this.tableData = $.grep(this.tableData,n=>n.goodsId != goods.goodsId);
+                this.getAllMoney();
+            },
+            //汇总金额和数量
+            getAllMoney(){
+                this.totalCount=0;
+                this.totalMoney=0;
+                if(this.tableData){
+                    $.each(this.tableData,(x,y)=>{
+                          this.totalCount += y.count;
+                          this.totalMoney += y.price*y.count;
+                        })
+                    }
             }
         },
         mounted:function(){
