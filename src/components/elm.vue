@@ -145,7 +145,7 @@ import $ from 'jquery'
             },
             //模拟结账
             checkOut(){
-                if(this.tableData != 0){
+                if(this.totalCount != 0){
                     this.tableData = [];
                     this.totalMoney = 0;
                     this.totalCount = 0;
@@ -165,7 +165,9 @@ import $ from 'jquery'
             },
             //删除单个商品
             delOrderList(goods){
+                console.log(this.tableData);
                 this.tableData = $.grep(this.tableData,n=>n.goodsId != goods.goodsId);
+                console.log(this.tableData);
                 this.getAllMoney();
             },
             //汇总金额和数量
