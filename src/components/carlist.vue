@@ -29,7 +29,7 @@ import axios from 'axios'
           methods:{
             list_xr(){
               var _this = this;
-               axios.get('../../static/carlist.json')
+               axios.get('../../static/carlist.json',{params:{userid:'100',color:'yellow'}})
                .then(function(response){
                   console.log(response.data.result[0].name);
                   //console.log(JSON.stringify(response,null,' '));
