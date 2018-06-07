@@ -10,6 +10,7 @@ import '../node_modules/mint-ui/lib/style.css'
 
 import Mb1 from './assets/js/flexible.debug.js'
 import Mb2 from './assets/js/flexible_css.debug.js'
+import $ from 'jquery'
 
   Vue.use(MintUI)
   Vue.component(MintUI)

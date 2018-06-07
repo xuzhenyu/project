@@ -2,22 +2,22 @@
     <div>
         <section>
           <div class="w-sdiv">
-            <div>
+            <div @click="xxx">
                 <p class="w-look"></p>
                 <strong>{{dtmsg}}</strong>
                 <span @click = "emitMyEvent">一城十店<br/>现场看车</span>
             </div>
-            <div>
+            <div @click="xxx">
                 <p class="w-true"></p>
                 <strong>真实可靠</strong>
                 <span>真车源100%<br/>一站式置换</span>
             </div>
-            <div>
+            <div @click="xxx">
                 <p class="w-money"></p>
                 <strong>优惠金融</strong>
                 <span>平安汽融<br/>超低利率</span>
             </div>
-            <div>
+            <div @click="xxx">
                 <p class="w-change"></p>
                 <strong>0元换购</strong>
                 <span>参加共享计划<br/>省心又省贷</span>
@@ -27,6 +27,7 @@
     </div>
 </template>
 <script>
+
   export default{
     props:['dtmsg'],
     data(){
@@ -37,6 +38,10 @@
     methods:{
       emitMyEvent(){
         this.$emit('my-event',this.name);
+      },
+      xxx(e){
+        $('div').find('span').css('color','#8b8b8b');
+        $(e.target).css('color','red');
       }
     }
   };
