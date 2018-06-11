@@ -1,0 +1,77 @@
+{
+	"status":"0",
+    "result":[
+        {
+            "title":"2015款 30周年版 30 TSFI 进取版",
+            "price":"27.28",
+            "img":"../../static/w_list_pic.jpg",
+            "msg":"上海/2015年2月/5.6万公里"
+        },
+        {
+            "title":"2014款 30 TSFI 舒适型",
+            "price":"29.1",
+            "img":"../../static/w_list_pic.jpg",
+            "msg":"北京/2005年2月/6万公里"
+        },
+        {
+            "title":"2015款 30 TSFI 纪念智领版",
+            "price":"30.56",
+            "img":"../../static/w_list_pic.jpg",
+            "msg":"武汉/2011年2月/5万公里"
+        },
+        {
+            "title":"2011款 30周年版 30 TSFI 标准版",
+            "price":"20.28",
+            "img":"../../static/w_list_pic.jpg",
+            "msg":"上海/2015年9月/5.6万公里"
+        },
+        {
+            "title":"2005款 30 TSFI 豪华版",
+            "price":"35",
+            "img":"../../static/w_list_pic.jpg",
+            "msg":"重庆/2009年7月/15万公里"
+        },
+        {
+            "title":"2013款 30 TSFI 运动版",
+            "price":"17.28",
+            "img":"../../static/w_list_pic.jpg",
+            "msg":"南通/2014年5月/1.6万公里"
+        },
+        {
+            "title":"2015款 30周年版 30 TSFI 进取版",
+            "price":"22",
+            "img":"../../static/w_list_pic.jpg",
+            "msg":"上海/2015年2月/5.6万公里"
+        },
+        {
+            "title":"2014款 30 TSFI 舒适型",
+            "price":"19",
+            "img":"../../static/w_list_pic.jpg",
+            "msg":"北京/2005年2月/6万公里"
+        },
+        {
+            "title":"2015款 30 TSFI 纪念智领版",
+            "price":"14.56",
+            "img":"../../static/w_list_pic.jpg",
+            "msg":"武汉/2011年2月/5万公里"
+        },
+        {
+            "title":"2011款 30周年版 30 TSFI 标准版",
+            "price":"17.58",
+            "img":"../../static/w_list_pic.jpg",
+            "msg":"上海/2015年9月/5.6万公里"
+        },
+        {
+            "title":"2005款 30 TSFI 豪华版",
+            "price":"30",
+            "img":"../../static/w_list_pic.jpg",
+            "msg":"重庆/2009年7月/15万公里"
+        },
+        {
+            "title":"2013款 30 TSFI 运动版",
+            "price":"20.58",
+            "img":"../../static/w_list_pic.jpg",
+            "msg":"南通/2014年5月/1.6万公里"
+        }
+    ]
+}
