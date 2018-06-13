@@ -6,6 +6,7 @@ import HomeNav from '../components/homenav.vue'
 import sourceList from '../components/sourcelist.vue'
 import Elm from '../components/elm.vue'
 import carlistpage from '@/components/carlistpage'
+import loadMore from '@/components/loadMore'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path:'/listpage',
       name:'carlistpage',
       component:carlistpage
+    },
+    {
+      path:'/loadmore',
+      name:'loadmore',
+      component:loadMore
     }
   ]
 })
