@@ -7,6 +7,7 @@ import sourceList from '../components/sourcelist.vue'
 import Elm from '../components/elm.vue'
 import carlistpage from '@/components/carlistpage'
 import loadMore from '@/components/loadMore'
+import goodlist from '@/views/GoodsList'
 
 Vue.use(Router)
 
@@ -14,8 +15,12 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: HomeNav
+      component: goodlist
     },
+    // {
+    //   path: '/',
+    //   component: HomeNav
+    // },
     {
         path: '/sellcar',
         name: 'carspeak',

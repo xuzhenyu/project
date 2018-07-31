@@ -1,20 +1,20 @@
 <template>
   <div id="app">
-    <NavTop></NavTop> 
+    <!-- <NavTop></NavTop>  -->
     <router-view></router-view>
-    <NavFooter></NavFooter>
+    <!-- <NavFooter></NavFooter> -->
   </div>
 </template>
 
 <script>
-import NavTop from '@/components/header'
-import NavFooter from './components/footer'
+// import NavTop from '@/components/header'
+// import NavFooter from './components/footer'
 export default {
   name: 'app',
-  components:{
-    NavTop,
-    NavFooter
-  },
+  // components:{
+  //   NavTop,
+  //   NavFooter
+  // },
 }
 </script>
 
