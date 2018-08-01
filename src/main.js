@@ -4,6 +4,7 @@ import Elementui from 'element-ui'
 import App from './App'
 import router from './router'
 import MintUI from 'mint-ui'
+import VueLazyLoad from 'vue-lazyload'
 //import Swipe from 'mint-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '../node_modules/mint-ui/lib/style.css'
@@ -15,6 +16,9 @@ import $ from 'jquery'
   Vue.use(MintUI)
   Vue.component(MintUI)
   Vue.use(Elementui)
+  Vue.use(VueLazyLoad,{
+    loading:"../static/loading-svg/loading-bubbles.svg"
+  })
 
 
 //Vue.config.productionTip = false
