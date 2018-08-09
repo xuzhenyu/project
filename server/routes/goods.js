@@ -17,13 +17,13 @@ mongoose.connection.on("error",function(){
 router.get("/",function(req,res,next){
     let page = req.param("page");
     let pageSize = parseInt(req.param("pageSize"));
-    let sort = 1*req.param("sort");
-    let skip = 1*(page-1)*pageSize;
+    let sort = parseInt(req.param("sort"));
+    let skip = (page-1)*pageSize;
     let params = {};
     let goodsModel = Goods.find(params).skip(skip).limit(pageSize);
     console.log(req.url);
     console.log(page,pageSize);
-    // goodsModel.sort({'salePrice':sort});
+    goodsModel.sort({'salePrice':sort});
     goodsModel.exec(function (err,doc) {
         if(err){
             res.json({
