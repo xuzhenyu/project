@@ -121,6 +121,8 @@
             return {
               goodsList:[],
               sortFlag:true,
+              page:2,
+              pageSize:3,
               priceFilter:[
                 {
                   startPrice:'0.00',
@@ -145,13 +147,20 @@
         },
         methods:{
           getGoodsList(){
-            axios.get('/goods').then((result)=>{
+            var param = {
+              page:this.page,
+              pageSize:this.pageSize,
+              sort:this.sortFlag?1:-1
+            }
+            axios.get('/goods',{params:param}).then((result)=>{
               var res = result.data;
               this.goodsList = res.result;
             })
           },
           sortGoods(){
             this.sortFlag =!this.sortFlag;
+            this.page = 1;
+            this.getGoodsList();
           },
           showFilterPop(){
             this.filterBy = true;
