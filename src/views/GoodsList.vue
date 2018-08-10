@@ -65,11 +65,11 @@
                 <ul>
                   <li v-for="item in goodsList">
                     <div class="pic">
-                      <a href="#"><img v-lazy="'../static/'+ item.productImg" alt=""></a>
+                      <a href="#"><img v-lazy="'../static/'+ item.productImage" alt=""></a>
                     </div>
                     <div class="main">
                       <div class="name">{{ item.productName }}</div>
-                      <div class="price">{{ item.productPrice }}</div>
+                      <div class="price">{{ item.salePrice }}</div>
                       <div class="btn-area">
                         <a href="javascript:;" class="btn btn--m">加入购物车</a>
                       </div>
@@ -152,9 +152,9 @@
               pageSize:this.pageSize,
               sort:this.sortFlag?1:-1
             }
-            axios.get('/goods',{params:param}).then((result)=>{
+            axios.get('http://localhost:3000/goods',{params:param}).then((result)=>{
               var res = result.data;
-              this.goodsList = res.result;
+              this.goodsList = res.result.list;
             })
           },
           sortGoods(){
