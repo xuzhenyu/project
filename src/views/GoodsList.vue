@@ -44,7 +44,7 @@
           <div class="filter-nav">
             <span class="sortby">Sort by:</span>
             <a href="javascript:void(0)" class="default cur">Default</a>
-            <a href="javascript:void(0)" @click="sortGoods()" class="price">Price <svg class="icon icon-arrow-short"><use xlink:href="#icon-arrow-short"></use></svg></a>
+            <a href="javascript:void(0)" @click="sortGoods" class="price">Price <svg class="icon icon-arrow-short"><use xlink:href="#icon-arrow-short"></use></svg></a>
             <a href="javascript:void(0)" class="filterby stopPop" @click="showFilterPop">Filter by</a>
           </div>
           <div class="accessory-result">
@@ -64,8 +64,8 @@
               <div class="accessory-list col-4">
                 <ul>
                   <li v-for="item in goodsList">
-                    <div class="pic">
-                      <a href="#"><img v-lazy="'../static/'+ item.productImage" alt=""></a>
+                    <div class="pic"><!-- v-lazy -->
+                      <a href="#"><img :src="'static/'+ item.productImage" alt=""></a>
                     </div>
                     <div class="main">
                       <div class="name">{{ item.productName }}</div>
@@ -76,6 +76,9 @@
                     </div>
                   </li>
                 </ul>
+                <div class="load-more" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="20">
+                  加载中....
+                </div>
               </div>
             </div>
           </div>
@@ -112,6 +115,20 @@
       </footer>
     </div>
 </template>
+<style>
+  .list-wrap ul::after{
+    clear:both;
+    content:'';
+    height:0;
+    display:block;
+    visibility:hidden;
+  }
+  .load-more{
+    height:100px;
+    line-height:100px;
+    text-align:center;
+  }
+</style>
 <script>
     import '../assets/css/base1.css'
     import '../assets/css/product.css'
@@ -121,8 +138,9 @@
             return {
               goodsList:[],
               sortFlag:true,
-              page:2,
-              pageSize:3,
+              page:1,
+              pageSize:8,
+              busy:true,
               priceFilter:[
                 {
                   startPrice:'0.00',
@@ -146,21 +164,44 @@
           this.getGoodsList();
         },
         methods:{
-          getGoodsList(){
+          getGoodsList(flag){
             var param = {
               page:this.page,
               pageSize:this.pageSize,
               sort:this.sortFlag?1:-1
-            }
-            axios.get('http://localhost:3000/goods',{params:param}).then((result)=>{
-              var res = result.data;
-              this.goodsList = res.result.list;
-            })
+            };
+            axios.get('http://localhost:3000/goods',{params:param}).then((response)=>{
+              var res = response.data;
+              //this.goodsList = res.result.list;
+              if(res.status=='0'){
+                if(flag){
+                  this.goodsList = this.goodsList.concat(res.result.list);
+
+                  if(res.result.count==0){
+                    this.busy = true;
+                  }else{
+                    this.busy = false;
+                  }
+                }else{
+                  this.goodsList = res.result.list;
+                  this.busy = false;
+                }
+              }else{
+                this.goodsList = [];
+              }
+            });
           },
           sortGoods(){
             this.sortFlag =!this.sortFlag;
             this.page = 1;
             this.getGoodsList();
+          },
+          loadMore(){
+            this.busy = true;
+            setTimeout(() => {
+              this.page++;
+              this.getGoodsList(true);
+            }, 500);
           },
           showFilterPop(){
             this.filterBy = true;
