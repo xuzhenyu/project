@@ -12,15 +12,16 @@ import goodlist from '@/views/GoodsList'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
-    {
-      path: '/',
-      component: goodlist
-    },
     // {
     //   path: '/',
-    //   component: HomeNav
+    //   component: goodlist
     // },
+    {
+      path: '/',
+      component: HomeNav
+    },
     {
         path: '/sellcar',
         name: 'carspeak',

@@ -20,6 +20,7 @@ router.get("/",function(req,res,next){
     let pageSize = parseInt(req.param("pageSize"));
     let sort = parseInt(req.param("sort"));
     let skip = (page-1)*pageSize;
+
     let priceLevel = req.param('priceLevel');
     var priceGt = '',priceLte = '';
     let params = {};
